@@ -14,11 +14,10 @@ int somaDiagonais(int vetor[LINHA][COLUNA]);
   
   
 #include "atividade.h"
-
 int main (){
     srand(time(NULL));
 
-    std::cout << "Atividade com Array " << LINHA << " X  " << COLUNA << "\n";
+    cout << "Atividade com Array " << LINHA << " X  " << COLUNA << "\n";
 
     int vetor[LINHA][COLUNA];
 
@@ -34,13 +33,25 @@ int main (){
 			
 
 	// o preechimento com números aleatórios no array
-    for (int linha = 0; linha < LINHA; linha++) {
-        for (int coluna = 0; coluna < COLUNA; coluna++) {
+    for (int linha = 0; linha < LINHA; linha++){
+        for (int coluna = 0; coluna < COLUNA; coluna++){
             vetor[linha][coluna] = rand() % 10;
             if(linha == coluna){
-            	std::cout << "| " << vetor[linha][coluna] << " |";
+            	cout << "| " << vetor[linha][coluna] << " |";
 			}else{
-				std::cout << "| " << vetor[linha][coluna] << " |";
+				cout << "| " << vetor[linha][coluna] << " |";
+			}            
+        }
+        cout << "\n";
+    }
+    
+    for (int linha = 5; linha > LINHA; linha--){
+        for (int coluna = 5; coluna > COLUNA; coluna--){
+            vetor[linha][coluna] = rand() % 10;
+            if(linha == coluna){
+            	cout << "| " << vetor[linha][coluna] << " |";
+			}else{
+				cout << "| " << vetor[linha][coluna] << " |";
 			}            
         }
         std::cout << "\n";
@@ -49,10 +60,15 @@ int main (){
 	std::cout << "\n";
 	std::cout << "Soma Linhas\n";
     somaLinhas(vetor);
-    
+  
     std::cout << "\n";
 	std::cout << "Soma Colunas\n";
     somaColunas(vetor);
+
+    std::cout << "\n";
+    std::cout << "\n";
+	std::cout << "Soma Diagonais\n";
+    somaDiagonais(vetor);
 
     return 0;
 }
@@ -65,26 +81,48 @@ int somaLinhas(int vetor[LINHA][COLUNA]){
 		    std::cout << "| " << vetor[linha][coluna] << " |";        	
             linhasSomadas[linha] += vetor[linha][coluna];
         }
-        std::cout << " = " << linhasSomadas[linha] << "\n";
+		cout << " = " << linhasSomadas[linha] << "\n";
     }
     return 0;
 }
 
 int somaColunas(int vetor[LINHA][COLUNA]){
-    // SOMA COLUNAS
+    // SOMA Diagonais
     int diagonaisSomadas[5];
     for (int linha = 0; linha < LINHA; linha++){
     	for (int coluna = 0; coluna < COLUNA; coluna++){
-    			std::cout << "| " << vetor[linha][coluna] << " |";  
+    			cout << "| " << vetor[linha][coluna] << " |";  
+	    		diagonaisSomadas[coluna] += vetor[linha][coluna];
+				}
+		cout << "\n";		
+	}
+	
+	std::cout << "============================\n";		
+	for (int i = 0; i < 5; i++){
+		cout << "| " << diagonaisSomadas[i] << " |"; 
+	}
+    return 0;
+}
+
+int somaDiagonais(int vetor[LINHA][COLUNA]){
+    // SOMA Diagonais
+    int diagonaisSomadas[5];
+    for (int linha = 0; linha < LINHA; linha++){
+    	for (int coluna = 0; coluna < COLUNA; coluna++){
+    			cout << "| " << vetor[linha][coluna] << " |";  
 	    		if(linha == coluna){
 	    			diagonaisSomadas[coluna] += vetor[linha][coluna];
 				}
+				
+				if(coluna == linha){
+					diagonaisSomadas[coluna] += vetor[linha][coluna];
+				}
 		}
-		std::cout << "\n";		
+		cout << "\n";		
 	}
 	std::cout << "============================\n";		
-	for (int i = 0; i < 5; i++) {
-		std::cout << "| " << diagonaisSomadas[i] << " |"; 
+	for (int i = 0; i < 2; i++){
+		cout << "| " << diagonaisSomadas[i] << " |"; 
 	}
     return 0;
 }
